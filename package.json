@@ -1,0 +1,32 @@
+{
+  "name": "lqip-io",
+  "version": "1.0.0",
+  "description": "Supporting JS library for https://lqip.io to perform lazy-loading and other tasks.",
+  "browser": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "minify": "minify src/index.js > dist/index.js"
+  },
+  "keywords": [
+    "LQIP",
+    "low",
+    "quality",
+    "image",
+    "placeholders",
+    "images",
+    "lazyload",
+    "blur",
+    "resize"
+  ],
+  "bugs": "https://github.com/thehenrymcintosh/lqip-io/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thehenrymcintosh/lqip-io"
+  },
+  "homepage": "https://lqip.io",
+  "author": "Henry McIntosh",
+  "license": "MIT",
+  "dependencies": {
+    "minify": "^6.0.1"
+  }
+}

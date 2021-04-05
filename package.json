@@ -1,11 +1,14 @@
 {
   "name": "lqip-io",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Supporting JS library for https://lqip.io to perform lazy-loading and other tasks.",
   "browser": "dist/index.js",
+  "browserslist": "> 0.25%, not dead",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "minify": "minify src/index.js > dist/index.js"
+    "test:watch": "mocha --require ts-node/register --watch --extension ts --recursive --watch-files ./src/**/**.ts,./test/**/**.ts",
+    "test": "mocha --require ts-node/register --extension .ts --recursive",
+    "build": "webpack --mode production",
+    "trace": "tsc --traceResolution"
   },
   "keywords": [
     "LQIP",
@@ -26,7 +29,26 @@
   "homepage": "https://lqip.io",
   "author": "Henry McIntosh",
   "license": "MIT",
-  "dependencies": {
-    "minify": "^6.0.1"
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-typescript": "^7.13.0",
+    "@types/chai": "^4.2.16",
+    "@types/jsdom": "^16.2.10",
+    "@types/mocha": "^8.2.2",
+    "@types/webpack-env": "^1.16.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "chai": "^4.3.4",
+    "jsdom": "^16.5.2",
+    "mocha": "^8.3.2",
+    "source-map-loader": "^2.0.1",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "tslint": "^6.1.3",
+    "typescript": "^4.2.3",
+    "typescript-module-alias": "^1.0.2",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
   }
 }

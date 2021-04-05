@@ -10,6 +10,16 @@ document.addEventListener("DOMContentLoaded", function() {
     );
   };
 
+  function includesLqip(e) {
+    return !e.includes("lqip")
+  }
+
+  function removeLqipParamFromURL(url) {
+    if (url.indexOf("?") < 0) return e;
+    var [base,qs] = e.split("?");
+    return base + "?" + qs.split("&").filter(includesLqip).join("&")
+  }
+
   var lqips = [];
 
   function setLqips() {
@@ -26,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function() {
           newlqips.push({type: "bg", element});
         }
       });
+    document.querySelectorAll("[srcset]")
+      .forEach(function(element) {
+        if (e.srcset.includes("?lqip") || e.srcset.includes("&lqip")) { 
+          newlqips.push({ type: "srcset", element });
+        }
+      });
     lqips = newlqips;
   }
   setLqips();
@@ -34,9 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!lqip || !lqip.style || !lqip.style.backgroundImage || lqip.style.backgroundImage.split('"').length !== 3 ) {
       return;
     }
-    var [src,qs] = lqip.style.backgroundImage.split('"')[1].split("?");
-    qs = qs.split("&").filter((section)=>!section.includes("lqip")).join("&");
-    src = src + "?" + qs;
+    var src = lqip.style.backgroundImage.split('"')[1];
+    src = removeLqipParamFromURL(src);
+
     var loader = document.createElement("img");
     loader.src = src;
     loader.addEventListener('load',function(){
@@ -48,9 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function loadImg(lqip) {
-    var [src,qs] = lqip.src.split("?");
-    qs = qs.split("&").filter((section)=>!section.includes("lqip")).join("&");
-    src = src + "?" + qs;
+    var src = removeLqipParamFromURL(lqip.src);
     var loader = document.createElement("img");
     loader.src = src;
     loader.addEventListener('load',function(){
@@ -61,11 +75,20 @@ document.addEventListener("DOMContentLoaded", function() {
     })
   }
 
+  function loadSrcset(lqip) {
+    if ("srcset" === lqip.type) {
+      var element = lqip.element;
+      element.srcset = element.srcset.split(" ").map(removeLqipParamFromURL).join(" ");
+    }
+  }
+
   function load(lqipData) {
     if ( lqipData.type === "bg" ) {
-      loadBg(lqipData.element)
+      loadBg(lqipData.element);
     } else if ( lqipData.type === "img" ) {
-      loadImg(lqipData.element)
+      loadImg(lqipData.element);
+    } else if (lqipData.type === "srcset" ) {
+      loadSrcset(lqipData.element);
     }
   }
 

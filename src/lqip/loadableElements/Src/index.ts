@@ -5,7 +5,6 @@ import { removeLqipParamFromURL } from "../../urlUtilites";
 export class Src implements ILoadable {
 
   private element: HTMLImageElement;
-  private error: Error | undefined;
 
   constructor(element: HTMLImageElement) {
     this.element = element;

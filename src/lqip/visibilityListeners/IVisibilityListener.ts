@@ -1,6 +1,6 @@
 import ILoadable from "../loadableElements/ILoadable";
+import IAssetLoader from "../assetLoader/IAssetLoader";
 
 export default interface IVisibilityListener {
-  supported(): boolean,
   watch(loadables: ILoadable[]) : void,
 }

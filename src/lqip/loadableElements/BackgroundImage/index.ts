@@ -15,6 +15,7 @@ export class BackgroundImage implements ILoadable {
   }
 
   async load(assetLoader: IAssetLoader) : Promise<void> {
+    debugger;
     if (!this.element.style || !this.element.style.backgroundImage) {
       return;
     }

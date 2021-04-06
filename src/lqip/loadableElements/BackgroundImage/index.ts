@@ -15,10 +15,8 @@ export class BackgroundImage implements ILoadable {
   }
 
   async load(assetLoader: IAssetLoader) : Promise<void> {
-    debugger;
-    if (!this.element.style || !this.element.style.backgroundImage) {
-      return;
-    }
+    if (!this.element.style || !this.element.style.backgroundImage) return;
+    
     const backgroundImage = this.element.style.backgroundImage;
 
     const ogSrc = backgroundImage.slice(4, -1).replace(/["']/g, "");

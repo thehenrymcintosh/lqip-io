@@ -49,7 +49,6 @@ export default class ManualListenerFactory implements IVisibilityListenerFactory
   }
 
   create(document: Document, assetLoader: IAssetLoader) {
-    console.log("Using manual observer");
     return new ManualVisibilityListener(document, assetLoader);
   }
 }

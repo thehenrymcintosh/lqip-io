@@ -48,7 +48,6 @@ export default class IntersectionObserverFactory implements IVisibilityListenerF
   }
 
   create(document: Document, assetLoader: IAssetLoader) {
-    console.log("Using intersection observer");
     return new IntersectionObserverListener(document, assetLoader);
   }
 }

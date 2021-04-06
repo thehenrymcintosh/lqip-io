@@ -15,21 +15,20 @@ export class SrcSet implements ILoadable {
   }
 
   async load(assetLoader: IAssetLoader) : Promise<void> {
-    if (!this.element.style || !this.element.style.backgroundImage) {
-      return;
-    }
-    const ogSrc = this.element.style.backgroundImage.split('"')[1];
-    const src = removeLqipParamFromURL(ogSrc);
-    return assetLoader.loadAsset(src)
-      .then(() => {
-        this.element.style.backgroundImage = `url("${src}")`;
-      })
-      .catch(_ => {});
+    if (!this.element.srcset) return;
+    this.element.srcset = this.element.srcset.split(" ").map(removeLqipParamFromURL).join(" ");
   }
 }
 
 
 
 export const SrcSetFactory = function SrcSetFactory(document: Document) : SrcSet[] {
-  return []
+  const loadables : SrcSet[] = []
+  document.querySelectorAll("img[srcset]")
+    .forEach(function(element: HTMLImageElement){
+      if ( element.srcset && ( element.srcset.includes("?lqip") || element.srcset.includes("&lqip") ) ) {
+        loadables.push(new SrcSet(element));
+      }
+    });
+  return loadables;
 }

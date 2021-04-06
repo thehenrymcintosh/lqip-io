@@ -29,7 +29,7 @@ export const SrcFactory = function srcFactory(document: Document) : Src[] {
   const loadables : Src[] = []
   document.querySelectorAll("img[src]")
     .forEach(function(element: HTMLImageElement){
-      if ( element.src && element.src.includes("?lqip") || element.src.includes("&lqip") ) {
+      if ( element.src && ( element.src.includes("?lqip") || element.src.includes("&lqip") ) ) {
         loadables.push(new Src(element));
       }
     });

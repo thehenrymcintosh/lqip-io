@@ -1,6 +1,6 @@
 {
   "name": "lqip-io",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Supporting JS library for https://lqip.io to perform lazy-loading and other tasks.",
   "browser": "dist/index.js",
   "browserslist": "> 0.25%, not dead",
